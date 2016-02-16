@@ -150,18 +150,15 @@ class PandasDataFrameHandler(BaseHandler):
 
 def register_handlers():
     """Call this function to register handlers with jsonpickle module."""
-    NumpyNumber.handles(np.float64)
-    NumpyNumber.handles(np.int64)
-    NumpyArrayHandler.handles(np.ndarray)
-
-    PandasIndexHandler.handles(pd.Index)
-    PandasDateTimeIndexHandler.handles(pd.DatetimeIndex)
-    PandasInt64IndexHandler.handles(pd.Int64Index)
-    PandasFloat64IndexHandler.handles(pd.Float64Index)
-
-    PandasTimeSeriesHandler.handles(pd.TimeSeries)
-
-    PandasDataFrameHandler.handles(pd.DataFrame)
+    jsonpickle.handlers.register(np.float64, NumpyNumber)
+    jsonpickle.handlers.register(np.int64, NumpyNumber)
+    jsonpickle.handlers.register(np.ndarray, NumpyArrayHandler)
+    jsonpickle.handlers.register(pd.Index, PandasIndexHandler)
+    jsonpickle.handlers.register(pd.DatetimeIndex, PandasDateTimeIndexHandler)
+    jsonpickle.handlers.register(pd.Int64Index, PandasInt64IndexHandler)
+    jsonpickle.handlers.register(pd.Float64Index, PandasFloat64IndexHandler)
+    jsonpickle.handlers.register(pd.TimeSeries, PandasTimeSeriesHandler)
+    jsonpickle.handlers.register(pd.DataFrame, PandasDataFrameHandler)
 
 
 def dumps(obj):
